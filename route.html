@@ -5,12 +5,10 @@
 		<script src="angular.js"></script>
 		<script src="angular-route.js"></script> 
 	</head>
-	
 	<body>
-		<h1>路由</h1>
+		<h2>手机列表</h2>
 		<div ng-view></div>
 	</body>
-	
 	<script type="text/javascript">
 		
 		//先创建一个phonecatFilters模块，
@@ -41,11 +39,10 @@
 		
 		function demo8($scope, $http, $routeParams){
 			
-			$http.post('/demo/phones.json').success(function(data){
+			$http.post('/angularjs_demo/phones.json').success(function(data){
 				
 				$scope.phones = data.data;
 				$scope.mainImageUrl = data.data[0].img;
-				
 			}).error(function(){
 				
 			});
@@ -54,7 +51,7 @@
 				$scope.mainImageUrl = img;
 			}
 			
-			$scope.orderProp = 'age';
+			$scope.orderProp = 'name';
 			
 			$scope.phoneId = $routeParams.phoneId;
 		}

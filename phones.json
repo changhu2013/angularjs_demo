@@ -1,33 +1,33 @@
 {
    "data" : [{
         "id" : 1,
-		"name" : "huawei",
-		"age" : 10,
-		"img" : "huawei.jpg"
+		"name" : "华为",
+		"age" : 998,
+		"img" : "img/huawei.jpg"
 	}, {
 		"id" : 2,
-		"name" : "samsung",
-		"age" : 4,
-		"img" : "samsung.jpg"
+		"name" : "三星",
+		"age" : 4999,
+		"img" : "img/samsung.jpg"
 	}, {
 		"id" : 3,
-		"name" : "htc",
-		"age" : 15,
-		"img" : "htc.jpg"
+		"name" : "HTC",
+		"age" : 3996,
+		"img" : "img/htc.jpg"
 	}, {
 		"id" : 4,
-		"name" : "apple",
-		"age" : 12,
-		"img" : "iphone.jpg"
+		"name" : "苹果",
+		"age" : 5100,
+		"img" : "img/iphone.jpg"
 	}, {
 		"id" : 5,
-		"name" : "xiaomi",
-		"age" : 33,
-		"img" : "xiaomi.jpg"
+		"name" : "小米",
+		"age" : 1999,
+		"img" : "img/xiaomi.jpg"
 	}, {
 		"id" : 6,
-		"name" : "meizu",
-		"age" : 4,
-		"img" : "meizu.jpg"
+		"name" : "魅族",
+		"age" : 1699,
+		"img" : "img/meizu.jpg"
 	}]
 }
