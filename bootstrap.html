@@ -6,12 +6,15 @@
         <title>angular.bootstrap</title>
     </head>
     <body>
-		<input ng-model="abc"/>
-		<p>{{abc}}</p>
+		<input ng-model="abc"/>{{abc}}
+		<hr>
+		<ul>
+		    <li>使用bootstrap来启动angular, 需要注意的是必须在所有的资源加载完毕之后</li>
+		</ul>
     </body>
 	<script>
 		angular.element(document).ready(function(){
 			angular.bootstrap(document);
 		});
-	</script>	
+	</script>
 </html>

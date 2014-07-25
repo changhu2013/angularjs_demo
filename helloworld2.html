@@ -1,12 +1,18 @@
 <!doctype html>
 <html ng-app>
     <head>
-        <script src="angular.js"></script>
         <meta charset="utf-8">
+        <script src="angular.js"></script>
+        <title ng-bind="yourname"></title>
     </head>
     <body>
-        你的名字: <input type="text" ng-model="yourname">
+        请输入你的名字: <input type="text" ng-model="yourname">
+        你好 {{yourname || '小苹果'}}!
         <hr>
-        你好  {{yourname || 'World'}}!
+        <ul>
+            <li>使用ng-model进行双向数据绑定</li>
+            <li>两个套在一起的{}进行单向数据绑定 其效果和ng-bind是一样的</li>
+            <li>括号内是一个表达式,使用 || 判断如果yourname为空的话使用默认的名字</li>
+        </ul>
     </body>
 </html>

@@ -7,11 +7,19 @@
     <div ng-controller="HelloController">
     	<input ng-model='greeting.text'>
         <p>{{greeting.text}}, World</p>
-        <p ng-bind='greeting.text' ng-hide='true'></p>
+        <hr>
+        <ul>
+            <li>引入angular.js文件</li>
+            <li>在一个合适的地方添加ng-app,例如html标签上，表示整个html表单都受angular引擎的管理</li>
+            <li>设置控制器 ng-controller </li>
+            <li>绑定数据模型 ng-model </li>
+        </ul>
     </div>
     <script type="text/javascript">
-        function HelloController($scope, $location){
-        	$scope.greeting = {text : 'Hello'};
+        function HelloController($scope){
+        	$scope.greeting = {
+                text : 'Hello'
+            };
         }
     </script>
 </html>
