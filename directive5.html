@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+    <head>
+        <meta charset="UTF-8">
+        <script type="text/javascript" src="angular.js"></script>
+    </head>
+    <body>
+    	<my-clock style="color:red;font-size:36px;"></my-clock>
+    </body>
+    <script type="text/javascript">
+    	angular.module('myApp', [])
+    	.directive('myClock', function(dateFilter){
+    		function linkFunc(scope, elements, attrs){
+    			setInterval(function(){
+    				elements.text(dateFilter(new Date(), 'yyyy/MM/dd hh:mm:ss'));
+    			}, 1000);
+    		}
+    		return {
+    			restrict : 'E',
+    			link : linkFunc
+    		}
+    	});
+    </script>
+</html>

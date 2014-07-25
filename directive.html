@@ -1,0 +1,24 @@
+<!doctype html>
+<html ng-app='myDir'>
+	<head>
+		<meta charset="UTF-8">
+		<script src="angular.js"></script>
+	</head>
+	<body ng-controller='myCtr'>
+	    <p my-dir></p>
+	</body>
+</html>
+<script type="text/javascript">
+	angular.module('myDir', [])
+	.controller('myCtr', function($scope){
+		$scope.user = {
+			name : 'changhu',
+			addr : 'ShannXi'
+		}
+	})
+	.directive('myDir', function () {
+  		return {
+		    template:'名字:{{user.name}}地址:{{user.addr}}'
+  		};
+	});
+</script>

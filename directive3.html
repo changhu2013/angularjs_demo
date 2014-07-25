@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+    <head>
+        <meta charset="UTF-8">
+        <script type="text/javascript" src="angular.js"></script>
+        <title>自定义指令</title>
+    </head>
+    <body >
+		<div ng-controller="myCtr">
+			<my-dir seq="first"></my-dir>
+            <hr>
+			<my-dir seq="second"></my-dir>
+		</div>
+    </body>
+    <script type="text/javascript">
+    	angular.module('myApp', [])
+    	.controller('myCtr', function($scope){
+    		$scope.first = {
+    			name : 'changhu',
+    			addr : 'ShannXi'
+    		};
+            $scope.second = {
+                name : 'qiannan',
+                addr : 'TianJing'
+            }
+    	})
+    	.directive('myDir', function(){
+    		return {
+    			restrict : 'E',
+    			templateUrl : 'my-dir3.html',
+                scope : {
+                    //dirSeq : '=seq'
+                    seq : '='
+                }
+    		};
+    	});
+    </script>
+</html>

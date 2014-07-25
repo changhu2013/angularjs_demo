@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+    <head>
+        <meta charset="UTF-8">
+        <script type="text/javascript" src="angular.js"></script>
+        <title>自定义指令</title>
+    </head>
+    <body >
+		<div ng-controller="myCtr">
+			<my-dir></my-dir>
+		</div>
+		<div ng-controller="myCtr1">
+			<my-dir></my-dir>
+		</div>
+    </body>
+    <script type="text/javascript">
+    	angular.module('myApp', [])
+    	.controller('myCtr', function($scope){
+    		$scope.user = {
+    			name : 'changhu',
+    			addr : 'ShannXi'
+    		};
+    	})
+    	.controller('myCtr1', function($scope){
+    		$scope.user = {
+    			name : 'QianNan',
+    			addr : 'TianJing'
+    		}
+    	})
+    	.directive('myDir', function(){
+    		return {
+    			restrict : 'E',
+    			templateUrl : 'my-dir.html'
+    		};
+    		/*
+			选项restrict可以设置成以下方式：
+			'A' - 仅匹配属性名
+			'E' - 仅匹配元素名
+			'AE' - 既匹配属性名又匹配元素名
+			*/
+    	});
+    </script>
+</html>
