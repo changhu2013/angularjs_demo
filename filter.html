@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="tf">
+    <head>
+        <meta charset="UTF-8">
+        <script type="text/javascript" src="angular.js"></script>
+    <head>
+    <body ng-controller='tfc'>
+
+        {{cm1 | checkmark}}
+        {{cm2 | checkmark}}
+    </body>
+    <script type="text/javascript">
+        
+        //创建一个过滤器模块，
+        angular.module('myFilters', []).filter('checkmark', function() {
+            return function(input) {
+                return input ? '\u2713' : '\u2718';
+            };
+        });
+
+        //创建一个tf模块，并定义控制器
+        angular.module('tf', ['myFilters'])
+            .controller('tfc', ['$scope', function($scope){
+                
+                $scope.cm1 = true;
+                $scope.cm2 = false;
+            }]);
+
+    </script>
+</html>

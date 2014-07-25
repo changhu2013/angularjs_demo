@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app>
+	
+	<head>
+		<meta charset="UTF-8">
+		<script src="angular.js"></script>
+	</head>
+	
+	<body>
+		<form ng-controller="CartController" ng-submit="submit()">
+			<h1 ng-bind="appName"></h1>
+			<div ng-repeat="item in items">
+				<p>{{item.name}} {{item.price}}</p>
+			</div>
+			<input type="checkbox" ng-model="youCheckIt" />
+			<hr/>
+			a :<input ng-change="changeB()" ng-model="obj.a"/>
+			<p>b = a * 10 : {{obj.b}}</p>
+			<p>c = b * 2: {{obj.c}}</p>
+			
+			<button> submit </button>
+			<button ng-click="reset()">reset</button>
+		</form>
+	</body>
+	
+	<script type="text/javascript">
+	    
+		function CartController($scope){
+			
+			$scope.appName = "DEMO10";
+		
+			$scope.items = [{
+				name : 'aaa',
+				price : 100
+			}, {
+				name : 'bbb',
+				price : 122
+			}];
+			
+			$scope.youCheckIt = true;
+		
+			$scope.obj = { 
+				a : 0, 
+				b : 0,
+				c : 0
+			};
+			
+			$scope.changeB = function(){
+				$scope.obj.b = $scope.obj.a  *  10;
+			};
+			
+			changeC = function(){
+				$scope.obj.c = $scope.obj.b * 2;
+			}
+			
+			//true 深度监听obj的属性变化
+			$scope.$watch('obj', changeC, true);
+			
+			$scope.submit = function(){
+				alert('submit');
+			}
+			
+			$scope.reset = function(){
+				$scope.obj.a = 0;
+			};
+			
+		}
+	
+	</script>
+	
+	
+<html>

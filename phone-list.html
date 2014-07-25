@@ -1,0 +1,27 @@
+<div>
+  <div>
+    <div>
+	
+		<img style="width:200px;height:200px;" ng-src="{{mainImageUrl}}" />
+	
+      <!--Sidebar content-->
+      Search: <input ng-model="query">
+      Sort by:
+      <select ng-model="orderProp">
+        <option value="name">Name</option>
+        <option value="age">Age</option>
+      </select>
+    </div>
+    <div >
+      <!--Body content-->
+      <ul>
+        <li ng-repeat="phone in phones | filter:query | orderBy:orderProp" >    
+			<p> {{ phone.age }} {{phone.age > 10 | checkmark}}</p>
+			<a href="#/phones/{{phone.id}}">{{phone.name}}</a>
+			<img style="width:60px;height:60px;" ng-src="{{phone.img}}" ng-click="setImage(phone.img)" />
+			
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

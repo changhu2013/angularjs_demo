@@ -1,0 +1,33 @@
+{
+   "data" : [{
+        "id" : 1,
+		"name" : "huawei",
+		"age" : 10,
+		"img" : "huawei.jpg"
+	}, {
+		"id" : 2,
+		"name" : "samsung",
+		"age" : 4,
+		"img" : "samsung.jpg"
+	}, {
+		"id" : 3,
+		"name" : "htc",
+		"age" : 15,
+		"img" : "htc.jpg"
+	}, {
+		"id" : 4,
+		"name" : "apple",
+		"age" : 12,
+		"img" : "iphone.jpg"
+	}, {
+		"id" : 5,
+		"name" : "xiaomi",
+		"age" : 33,
+		"img" : "xiaomi.jpg"
+	}, {
+		"id" : 6,
+		"name" : "meizu",
+		"age" : 4,
+		"img" : "meizu.jpg"
+	}]
+}

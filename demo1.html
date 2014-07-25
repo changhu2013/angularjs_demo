@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app>
+    
+	<head>
+        <meta charset="UTF-8" />
+		<script src="angular.js"></script>
+	</head>
+	
+	<body>
+	    <div ng-controller="HelloAngular">
+	        <input ng-model='greeting.text'>
+		    <p>{{greeting.text}} Angular</p>
+		</div>
+	</body>
+	
+	<script  type="text/javascript">
+	    function HelloAngular($scope, $location){
+		    
+		    $scope.greeting = {
+				text : 'Hello'
+			};
+
+			alert($location);
+		}
+	</script>
+
+</html>
+
+
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app>
+    <head>
+        <meta charset="UTF-8">
+		<script src="angular.js"></script>
+        <title>watch</title>
+    </head>
+    <body>
+        <div ng-controller="testWatch">
+            <input ng-model="a" type="text"/>
+            {{b}}
+            <button ng-click='doWatch();'>{{btnName1}}</button>
+            <button ng-click='unWatch();'>{{btnName2}}</button>
+        </div>
+    </body>
+    <script type="text/javascript">
+         function testWatch($scope){
+
+         	$scope.a = 'AAAAAAAA';
+         	$scope.btnName1 = '监听1';
+         	$scope.btnName2 = '取消监听';
+
+         	var w = null;
+         	$scope.doWatch = function(){
+         		w = $scope.$watch('a', function(){
+         			$scope.b = $scope.a;
+         		});
+         	};
+
+         	$scope.unWatch = function(){
+         		if(typeof w == 'function'){
+         			w();
+         		}
+         	}
+         	
+         }
+    </script>
+</html>

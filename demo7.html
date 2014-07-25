@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app ng-controller="demo7">
+    <head>
+		<meta charset="UTF-8">
+		<script src="angular.js"></script>
+		<title>{{query}}</title>
+	</head>
+	
+	<body>	
+		<div>
+			Search : <input ng-model="query"/>
+			<select ng-model="orderProp">
+				<option value="name">Name</option>
+				<option value="age">Age</option>
+			</select>
+			<ul>
+				<li ng-repeat="phone in phones | filter:query | orderBy:orderProp">
+					<p>name : {{phone.name}} age : {{phone.age}}</p>
+					<!-- ng-src 解决浏览器在angularjs执行之前自动加载图片的问题 -->
+					<img style="width:100px;height:100px;" ng-src="{{phone.img}}">
+				</li>
+			</ul>
+			
+			<h1>JSON</h1>
+			<div>{{phones | json}}</div>
+		</div>
+	</body>
+	
+	<script type="text/javascript">
+	
+		function demo7($scope, $http){
+			$http.post('/phones.json').success(function(data){
+				$scope.phones = data.data;
+			}).error(function(){
+				
+			});
+			$scope.orderProp = 'age';
+		}
+	
+	</script>
+	
+</html>

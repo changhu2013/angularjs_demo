@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <script type="text/javascript" src="angular.js"></script>
+        <meta charset="UTF-8">
+        <title>angular.bootstrap</title>
+    </head>
+    <body>
+		<input ng-model="abc"/>
+		<p>{{abc}}</p>
+    </body>
+	<script>
+		angular.element(document).ready(function(){
+			angular.bootstrap(document);
+		});
+	</script>	
+</html>

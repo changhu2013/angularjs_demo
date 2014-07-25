@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html ng-app="demo11">
+    
+	<head>
+		<meta charset="UTF-8">
+		<script src="angular.js"></script>
+	</head>
+	
+	<style type="text/css">
+		
+		.selected {
+			background-color : lightgreen;
+		}
+		
+		.error {
+			background-color : red;
+		}
+		
+		.warning {
+			background-color : yellow;
+		}
+	</style>
+	
+	<body ng-controller="demo11Controller">
+		Show:<input type="checkbox" ng-model="show"/>
+		<ul ng-show="show">
+			<li ng-repeat="item in items" 
+				ng-click="selectedItem($index)" 
+				ng-class="{selected : $index == selectedItemIndex}">
+				<p>{{item}}</p>
+			</li>
+		</ul>
+		
+		<div ng-class="{error : isError, warning : isWarning}">
+			{{message}}
+		</div>
+		
+		<button ng-click="setError()">error</button>
+		<button ng-click="setWarning()">warning</button>
+		
+		<hr>
+		<img ng-src="{{phone}}" style="width : 100px; height : 100px;"> 
+		<a ng-href="{{baidu}}">baidu</a>
+		
+		<hr>
+		<button ng-init="count=1" ng-click="count=count+3">count = count + 3 </button>
+		<div>count : {{count}}</div>
+		
+	</body>
+	
+	<script type="text/javascript">
+	
+	    angular.module('demo11', [])
+			.controller('demo11Controller', function($scope){
+				
+				$scope.show = true;
+				
+				$scope.items = ['a', 'b', 'c', 'd'];
+				
+				$scope.message = "message";
+				$scope.isError = false;
+				$scope.isWarning = false;
+				
+				$scope.setError = function(){
+					$scope.message = "error message";
+					$scope.isError = true;
+					$scope.isWarning = false;
+				};
+				
+				$scope.setWarning = function(){
+					$scope.message = "warning message";
+					$scope.isError = false;
+					$scope.isWarning = true;
+				}
+				
+				$scope.selectedItemIndex = -1;
+				
+				$scope.selectedItem = function(index){
+					$scope.selectedItemIndex = index;
+				};
+				
+				$scope.phone = "iphone.jpg";
+				$scope.baidu = "http://www.baidu.com";
+				
+			});
+	
+	
+	</script>
+	
+	
+</html>

@@ -1,0 +1,173 @@
+<!doctype html>
+<html ng-app>
+    
+	<head>
+	    <meta charset="UTF-8">
+	    <title>calculator</title>
+		<script src="angular.js"></script>
+	</head>
+
+	<style type="text/css">
+		
+		* {
+		    margin : 0px;
+			padding : 0px;
+		}
+		
+		body {
+			background-color: #ECECEC;
+		}
+		
+		.main-panel {
+		    position : absolute;
+			left : 50%;
+			top : 30%;
+			margin-left:-120px;
+			margin-top : -120px;
+			width : 240px;
+			height : 20px;
+			border : 1px; solid;
+			background-color:#FFFFFF;
+			padding : 30px 10px 10px 10px;
+		}
+		
+		.result {
+		    height : 60px;
+			width : 260px;
+			text-align : right;
+			letter-spacing : 1px;
+			border : 2px;
+			border-color: #DCDCEE;
+			border-style: solid;
+		}
+		
+		.button {
+		    width : 60px;
+			height : 40px;
+			font-size : 18px;
+			margin : 2px;
+			color: #FFFFFF;
+			border : 0px;
+		}
+		
+		.clear {
+			background-color : #CCCCFF;
+		}
+		
+		.delete {
+			background-color : #CCCCFF;
+		}
+		
+		.number {
+			background-color : #CCCCCC;
+		}
+		
+		.zero {		
+		    width : 128px !important;
+			background-color : #9DA9DA;
+		}
+		
+		.option {
+			background-color : #CCCC99;
+		}
+		
+		.equal {
+		    height : 86px !important; 
+		}
+		
+	</style>
+	
+	<body>
+	    <div ng-controller="calculator">
+			<table class="main-panel">
+			    <tr>
+				    <td colspan="4"><input type="text" ng-model="result" class="result"/></td>
+				</tr>
+				<tr>
+				    <td><button ng-click="clear();" class="button clear">C</button></td>
+					<td><button ng-click="delete();" class="button delete">DEL</button></td>
+					<td><button ng-click="input($event);" class="button option">/</button></td>
+					<td><button ng-click="input($event);" class="button option">*</button></td>
+				</tr>
+				<tr>
+				    <td><button ng-click="input($event);" class="button number">7</button></td>
+					<td><button ng-click="input($event);" class="button number">8</button></td>
+					<td><button ng-click="input($event);" class="button number">9</button></td>
+					<td><button ng-click="input($event);" class="button option">-</button></td>
+				</tr>
+				<tr>
+				    <td><button ng-click="input($event);" class="button number">4</button></td>
+					<td><button ng-click="input($event);" class="button number">5</button></td>
+					<td><button ng-click="input($event);" class="button number">6</button></td>
+					<td><button ng-click="input($event);" class="button option">+</button></td>
+				</tr>
+				<tr>
+				    <td><button ng-click="input($event);" class="button number">1</button></td>
+					<td><button ng-click="input($event);" class="button number">2</button></td>
+					<td><button ng-click="input($event);" class="button number">3</button></td>
+					<td rowspan="2"><button ng-click="calculate();" class="button option equal">=</button></td>
+				</tr>
+				<tr>
+				    <td colspan="2"><button ng-click="input($event);" class="button number zero">0</button></td>
+					<td><button ng-click="input($event);" class="button number">.</button></td>
+				</tr>
+			</table>
+		</div>
+	</body>
+	
+	<script type="text/javascript">
+	
+	    function calculator($scope){
+		    
+			//结果
+			$scope.result = 0;
+			
+			//清除
+			$scope.clear = function(){
+				$scope.result = 0;
+			}
+			
+			//删除
+			$scope.delete = function(){
+				var s = String($scope.result);
+				if(s.length > 0){
+				    s = s.substring(0, s.length-1)
+				}else {
+				    s = '0';
+				}
+				$scope.result = Number(s);
+			}
+			
+			//输入
+			$scope.input = function(evt){
+				try{
+					var express = $scope.result;
+					if(express.length > 0){
+						var o = express.substr(-1);
+						if('+-*/'.indexOf(o) > -1){
+							eval(express.substring(0, express.length -1));
+						}else {
+							eval(express);
+						}
+					}else {
+						eval(express);
+					}
+					$scope.result += evt.target.innerHTML;
+				}catch(e){
+					var a = this;
+				}
+			}
+			
+			//计算
+			$scope.calculate = function(){
+				var express = $scope.result;
+				try{
+					$scope.result = eval(express);
+				}catch(e){}
+			}
+		}
+	
+	</script>
+	
+	
+</html>

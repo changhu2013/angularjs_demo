@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ng-app="demo8" ng-controller="demo8">
+	<head>
+		<meta charset="UTF-8">
+		<script src="angular.js"></script>
+		<script src="angular-route.js"></script> 
+	</head>
+	
+	<body>
+		<h1>路由</h1>
+		<div ng-view></div>
+	</body>
+	
+	<script type="text/javascript">
+		
+		//先创建一个phonecatFilters模块，
+		angular.module('phonecatFilters', []).filter('checkmark', function() {
+			return function(input) {
+				return input ? '\u2713' : '\u2718';
+			};
+		});
+		
+		//新版本的angular首先需要导入angular-route 在引入模块ngRoute
+		//将phonecatFilters模块作为一个依赖注册到主模块demo8上
+		angular.module('demo8', ['ngRoute', 'phonecatFilters'])
+		.config(['$routeProvider', function($routeProvider){
+			
+			$routeProvider.when('/phonelist', {
+				templateUrl : 'phone-list.html',
+				controller : demo8
+			})
+			.when('/phones/:phoneId', {
+				templateUrl : 'phone-detail.html',
+				controller : demo8
+			})
+			.otherwise({
+				redirectTo : 'phonelist'
+			});
+			
+		}]);
+		
+		function demo8($scope, $http, $routeParams){
+			
+			$http.post('/demo/phones.json').success(function(data){
+				
+				$scope.phones = data.data;
+				$scope.mainImageUrl = data.data[0].img;
+				
+			}).error(function(){
+				
+			});
+			
+			$scope.setImage = function(img){
+				$scope.mainImageUrl = img;
+			}
+			
+			$scope.orderProp = 'age';
+			
+			$scope.phoneId = $routeParams.phoneId;
+		}
+	
+	</script>
+	
+</html>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html ng-app="demo5">
+	<head>
+		<meta charset="UTF-8">
+		<script src="angular.js"></script>
+	</head>	
+	<body ng-controller="directive">
+		<input ng-model="content" />
+		<pre>model = {{content}}</pre>
+		<button ng-click="action()" >reset</button>
+	</body>
+</html>
+<script type="text/javascript">
+
+	var demo5 = angular.module('demo5', []);
+	demo5.controller("directive", ['$scope', '$http', function directive($scope, $http){
+
+	    $http.post('/demo/phones.json').success(function(data){
+	    	$scope.phones = data;
+	    }).error(function(){
+	    	alert('error');
+	    });
+
+
+		$scope.content = "abc";
+		$scope.action = function(){
+			$scope.content = "abc";
+	    }
+	}]);
+</script>

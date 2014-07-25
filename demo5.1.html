@@ -1,0 +1,23 @@
+<!doctype html>
+<html ng-app>
+	<head>
+		<meta charset="UTF-8">
+		<script src="angular.js"></script>
+	</head>	
+	<body ng-controller="directive">
+		<input ng-model="content" />
+		<pre>model = {{content}}</pre>
+		<button ng-click="action()" >reset</button>
+	</body>
+</html>
+<script type="text/javascript">
+
+	function directive($scope){
+	    
+		$scope.content = "abc";
+		$scope.action = function(){
+			$scope.content = "abc";
+	    }
+	};
+
+</script>

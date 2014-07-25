@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="demo9">
+	<head>
+		<meta charset="UTF-8">
+		<script src="angular.js"></script>
+		<script src="angular-resource.js"></script>
+	</head>
+	
+	<body>
+		<h1>services</h1>
+		<div ng-controller="demo9Controller">
+			<div> {{phones | json}} </div>
+		</div>
+	</body>
+	
+	<script type="text/javascript">
+	
+		//
+		angular.module('myServices', ['ngResource']).factory('Phone', function($resource){
+			
+			return $resource('phones.json', {}, {
+				query : {
+					method : 'GET',
+					params : {
+						//phoneId : 'phones'
+					},
+					isArray : false
+				}
+			});
+			
+		});
+	
+		angular.module('demo9', ['myServices']);
+	
+		function demo9Controller($scope, Phone){
+			
+			$scope.phones = Phone.query();
+			
+		}
+	
+	</script>
+	
+</html>
