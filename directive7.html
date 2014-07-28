@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+    <head>
+        <script type="text/javascript" src="angular.js"></script>
+    </head>
+    <body>
+        <div ng-controller="myCtr">
+        	<my-dialog ng-hide="dialogIsHidden" on-close="hideDialog()">
+        	    Check out the contents, {{name}}!
+        	</my-dialog>
+        </div>
+    </body>
+    <script type="text/javascript">
+    	angular.module('myApp', [])
+    	.controller('myCtr', function($scope, $timeout){
+    		$scope.name = 'Tobias';
+    		$scope.hideDialog = function(){
+    			$scope.dialogIsHidden = true;
+    			$timeout(function(){
+    				$scope.dialogIsHidden = false;
+    			}, 2000);
+    		};
+    	})
+    	.directive('myDialog', function(){
+    		return {
+    			restrict : 'E',
+    			transclude : true,
+    			scope : {
+    				'close' : '&onClose'
+    			},
+    			templateUrl : 'my-dialog-close.html'
+    		};
+    	});
+    </script>
+</html>

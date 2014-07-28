@@ -1,14 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 	<head>
 		<meta charset="UTF-8">
 		<script type="text/javascript" src="angular.js"></script>
 	</head>
 	<body>
-		<div>
+		<div ng-controller="myCtr">
+			<my-dialog>Check out the contents, {{name}}!</my-dialog>
 		</div>
 	</body>
 	<script type="text/javascript">
-		
+		angular.module('myApp', [])
+		.controller('myCtr', function($scope){
+			$scope.name = 'Tobias';
+		})
+		.directive('myDialog', function(){
+			return {
+				restrict : 'E',
+				transclude : true,
+				templateUrl : 'my-dialog.html'
+			};
+		});
 	</script>
 </html>

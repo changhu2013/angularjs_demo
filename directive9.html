@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+    <head>
+        <meta charset="UTF-8" />
+        <script type="text/javascript" src="angular.js"></script>
+        <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+        <script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    </head>
+    <body>
+        <!-- Tab组件 -->
+        <my-tabs>
+            <!-- 第1个面板 -->
+            <my-pane title="Hello">
+                <h5>Hello</h5>
+                <p>Lorem ipsum dolor sit amet</p>
+            </my-pane>
+            <!-- 第2个面板 -->
+            <my-pane title="World">
+                <h5>World</h5>
+                <em>Mauris elementum elementum enim at suscipit.</em>
+                <p><a href ng-init="i = 1" ng-click="i = i + 1">counter: {{i}}</a></p>
+            </my-pane>
+            <!-- 第2个面板 -->
+            <my-pane title="第三个">
+                <h5>第三个面板</h5>
+            </my-pane>
+        </my-tabs>
+    </body>
+    <script type="text/javascript">
+        angular.module('myApp', [])
+        .directive('myTabs', function(){
+            return {
+                restrict : 'E',
+                transclude : true,
+                scope : {},
+                controller : function($scope){
+                    var panes = $scope.panes = [];
+                    $scope.select = function(idx){
+                        for(var i = 0 ; i < panes.length; i++){
+                            if(i == idx){
+                                panes[i].pane.selected = true;
+                            }else {
+                                panes[i].pane.selected = false;
+                            }
+                        }
+                    };
+                    this.addPane = function(title, pane){
+                        panes.push({
+                            title : title,
+                            pane : pane
+                        });
+                        $scope.select(0);
+                    };
+                },
+                templateUrl : 'my-tabs.html'
+            };
+        })
+        .directive('myPane', function(){
+            return {
+                require : '^myTabs',
+                restrict : 'E',
+                transclude : true,
+                scope : {
+                    title : '@'
+                },
+                link : function(scope, element, attrs, tabsCtrl){
+                    var title = element.attr('title')
+                    tabsCtrl.addPane(title, scope);
+                },
+                templateUrl : 'my-pane.html'
+            };
+        });
+    </script>
+</html>
