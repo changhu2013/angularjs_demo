@@ -1,30 +1,54 @@
 <!doctype html>
-<html ng-app="demo5">
+<html ng-app="myApp">
 	<head>
 		<meta charset="UTF-8">
 		<script src="angular.js"></script>
 	</head>	
-	<body ng-controller="directive">
-		<input ng-model="content" />
-		<pre>model = {{content}}</pre>
-		<button ng-click="action()" >reset</button>
+	<body ng-controller="myCtr">
+		<button ng-click="doPost()" >POST</button>
+		<span>{{data | json}}</span>
 	</body>
 </html>
 <script type="text/javascript">
+	angular.module('myApp', [])
+	.controller("myCtr", ['$scope', '$http', function($scope, $http){
+		$scope.doPost = function(){
+			
+			//POST
+			var data = {
+				companyCode : '01',
+				user : {
+					userUniqueId : '001',
+					code : 'admin',
+					name : '系统管理员'
+				}
+			};
+			var config = {
+				headers : {
+					"Rs-method" : "getData",
+					"Rs-accept" : "JSON"
+				},
+				transformRequest : function(data, headersGetter){
 
-	var demo5 = angular.module('demo5', []);
-	demo5.controller("directive", ['$scope', '$http', function directive($scope, $http){
+					var a = this;
+					return data;
+				}, 
 
-	    $http.post('/demo/phones.json').success(function(data){
-	    	$scope.phones = data;
-	    }).error(function(){
-	    	alert('error');
-	    });
+				transformResponse : function(data, headersGetter){
 
+					return JSON.parse(data);
+					//return data;
+				}
+			};
 
-		$scope.content = "abc";
-		$scope.action = function(){
-			$scope.content = "abc";
-	    }
+			$http.post('data.json', data, config)
+			.success(function(data){
+		    	
+		    	$scope.data = data;
+		    }).error(function(){
+
+		    	$scope.data = 'EROOR!';
+		    });
+		};
 	}]);
 </script>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+    <head>
+        <meta charset="UTF-8" />
+        <script type="text/javascript" src="angular.js"></script>
+        <script type="text/javascript" src="angular-resource.js"></script>
+    </head>
+    <body>
+        <div ng-controller="myCtr">
+            <button ng-click="doGetUsers()">doGetUsers</button>
+            <button ng-click="doGetUserById()">doGetUserById</button>
+            <button ng-click="doUpdateUser()">doUpdateUser</button>
+            <hr/>
+            <span>{{user | json}}</span>
+            <hr/>
+            <span>{{users | json}}</span>
+        </div>
+    </body>
+    <script type="text/javascript">
+        angular.module('myApp', ['ngResource'])
+        .controller('myCtr', ['$scope', '$resource', function($scope, $resource){
+            var User = $resource('user/:userId', null, {
+                    getUsers : {
+                        method : 'GET',
+                        isArray : true,
+                        url : 'user/users',
+                        params : {
+                            companyCode : '01'
+                        }
+                    },
+                    getUserById : {
+                        method : 'GET',
+                        isArray : false,
+                        params : {
+                            companyCode : '01'
+                        }
+                    },
+                    saveUser : {
+                        method : 'POST',
+                        url : 'user/user_for_update',
+                        params : {
+                            companyCode : '01'
+                        }
+                    }
+                });
+            $scope.doGetUsers = function(){
+                $scope.users = User.getUsers();
+            };
+            $scope.doGetUserById = function(){
+                $scope.user = User.getUserById({
+                    userId : 101
+                });
+            }
+            $scope.doUpdateUser = function(){
+                $scope.user.code = 'USER_CODE';
+                $scope.user.$saveUser();
+            }
+        }]);
+
+    </script>
+</html>

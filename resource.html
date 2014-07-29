@@ -1,43 +1,37 @@
 <!DOCTYPE html>
-<html ng-app="demo9">
+<html ng-app="myApp">
 	<head>
 		<meta charset="UTF-8">
 		<script src="angular.js"></script>
+		<!-- 该程序中使用$resource指令，必须引入angular-resource文件 -->
 		<script src="angular-resource.js"></script>
 	</head>
-	
 	<body>
-		<h1>services</h1>
-		<div ng-controller="demo9Controller">
-			<div> {{phones | json}} </div>
+		<div ng-controller="myCtr">
+			<div> {{data | json}} </div>
 		</div>
 	</body>
-	
 	<script type="text/javascript">
-	
-		//
-		angular.module('myServices', ['ngResource']).factory('Phone', function($resource){
-			
-			return $resource('phones.json', {}, {
+
+		//创建myService服务，并引入ngResource模块
+		angular.module('myServices', ['ngResource'])
+		.factory('Data', function($resource){
+			return $resource('data.json', {}, {
 				query : {
 					method : 'GET',
-					params : {
-						//phoneId : 'phones'
-					},
+					params : {},
 					isArray : false
 				}
 			});
-			
 		});
 	
-		angular.module('demo9', ['myServices']);
-	
-		function demo9Controller($scope, Phone){
-			
-			$scope.phones = Phone.query();
-			
-		}
-	
+		//创建myApp模块，并引入myService服务
+		angular.module('myApp', ['myServices'])
+		.controller('myCtr', ['$scope', 'Data', function($scope, Data){
+
+			$scope.data = Data.query();
+
+		}]);
 	</script>
 	
 </html>
