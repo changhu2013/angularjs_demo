@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <script type="text/javascript" src="angular.js"></script>
+        <script type="text/javascript" src="angular-touch.js"></script>
+    </head>
+    <body>
+        <div ng-show="!showActions" ng-swipe-left="showActions=true"
+            style="width:100%;height:200px;background-color:red;color:white;font-size:60px;">
+            向左滑动试试
+        </div>
+        <div ng-show="showActions" ng-swipe-right="showActions=false"
+            style="width:100%;height:200px;background-color:blue;color:white;font-size:60px;">
+            向右滑动试试
+        </div>
+    </body>
+    <script type="text/javascript">
+        angular.module('myApp', ['ngTouch']);
+    </script>
+</html>
